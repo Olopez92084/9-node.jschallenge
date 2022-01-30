@@ -1,44 +1,44 @@
 
 const inquirer = require("inquirer");
 const fs = require("fs");
-const generateMarkdown = require("./utils/generateMarkdown");
-const { loadFromBuffer } = require("bser");
+const generateMarkdown = require("./utils/generateMarkdown.js");
+
 
 const questions = () => {
   return inquirer.prompt([
     {
         type: "input",
         name: "github",
-        message: "Please enter your GitHub Username (Required)",
+        message: "Enter your GitHub Username.",
         validate: (githubInput) => {
           if (githubInput) {
             return true;
           } else {
-            console.log("Please enter your GitHub username!");
+            console.log("GitHub username Required!");
             return false; }
         },
       },
     {
       type: "input",
       name: "title",
-      message: "What is your project title? (Required)",
+      message: "What is your project title?",
       validate: (projectTitle) => {
         if (projectTitle) {
           return true;} 
         else {
-          console.log("Please enter your project title!");
+          console.log("Project title is Required!");
         return false; }
       },
     },
     {
       type: "input",
       name: "description",
-      message: "Please enter a short description of your project (Required)",
+      message: "Enter a short description of your project.",
       validate: (projectDescription) => {
         if (projectDescription) {
           return true;
         } else {
-          console.log("Please enter your project description!");
+          console.log("Project description is Required!");
           return false;
         }
       },
@@ -46,7 +46,7 @@ const questions = () => {
     {
       type: "checkbox",
       name: "languages",
-      message: "What did you build this project with? (Check all that apply)",
+      message: "What did you use to build this project?",
       choices: [
         "Javascript",
         "HTML",
@@ -66,7 +66,7 @@ const questions = () => {
         if (projectLicense) {
           return true;
         } else {
-          console.log("Please choose a project license type!");
+          console.log("Project license type Required!");
           return false;
         }
       },
@@ -74,13 +74,13 @@ const questions = () => {
     {
       type: "input",
       name: "installation",
-      message: "What command(s) should be run to install dependencies?",
+      message: "What command is run to install dependencies?",
       default: "npm install",
     },
     {
       type: "input",
       name: "test",
-      message: "What command(s) should be run to run tests?",
+      message: "What command is used to run tests?",
       default: "npm test",
     },
     {
@@ -91,12 +91,12 @@ const questions = () => {
     {
         type: "input",
         name: "website",
-        message: "Please enter your project website (Required)",
+        message: "Enter your project website.",
         validate: (projectWebsite) => {
           if (projectWebsite) {
             return true;
           } else {
-            console.log("Please enter your project website!");
+            console.log("Project website Required!");
             return false;
           }
         },
@@ -104,12 +104,12 @@ const questions = () => {
     {
       type: "input",
       name: "email",
-      message: "What's your email address? (Required)",
+      message: "Enter your email address?",
       validate: (emailInput) => {
         if (emailInput) {
           return true;
         } else {
-          console.log("Please enter your email!");
+          console.log("Email Address Required!");
           return false;
         }
       },
@@ -117,12 +117,12 @@ const questions = () => {
     {
       type: "input",
       name: "contributing",
-      message: "Please enter the contributor name(s) for this project:",
+      message: "Enter contributor names for the project:",
       validate: (contributorName) => {
         if (contributorName) {
           return true;
         } else {
-          console.log("Please enter contributor(s) name!");
+          console.log("Contributors names are required!");
           return false;
         }
       },
@@ -133,7 +133,7 @@ const questions = () => {
 // TODO: Create a function to write README file
 const writeToFile = data => {
   return new Promise((resolve, reject) => {
-    fs.writeFile("./generatedREADME.md", data, err => {
+    fs.writeFile("./projectREADME.md", data, err => {
       if (err) {
         reject(err);
         // return out of the function here to make sure the Promise doesn't accidentally execute resolve() too
@@ -155,7 +155,7 @@ function init() {
     // template literal send to writeToFile
     .then((res) => {
       writeToFile(res);
-      console.log("Success! Check out your generatedREADME.md");
+      console.log("projectREADME.md Successfully Generated!");
     });
 }
 

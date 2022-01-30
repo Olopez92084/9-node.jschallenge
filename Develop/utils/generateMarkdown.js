@@ -1,6 +1,5 @@
 function generateMarkdown(data) {
   let output = `
-  ![License Badge](https://img.shields.io/badge/License-${data.license}-green.svg)
   #### GitHub Username: ${data.github}
   #### GitHub Email Address: ${data.email}
   # ${data.title}
@@ -14,9 +13,10 @@ function generateMarkdown(data) {
   * [Website](#website)
   * [Testing](#testing)
   * [Questions](#questions)
-  * [License](#license)`;
+  * [License](#license)
+  * ![License Badge](https://img.shields.io/badge/License-${data.license}-green.svg)`;
   
-  // regular expression (REGEX)
+
   data.languages = data.languages.toString().replace(/[ ]*,[ ]*|[ ]+/g, '\n* ');
   output += `
   ## Built With:
